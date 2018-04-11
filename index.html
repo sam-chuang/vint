@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/picnic@6.5.0/releases/picnic.min.css">
+        <script type="text/javascript"  src="/dist/vint.js"></script>
+    </head>
+    <body style="margin:0;">
+        <section
+            style="height:100vh">
+            Intro
+        </section>
+        <section>
+            <img 
+                id="random-img"
+                style="height:auto;width:100%;"/>
+            <script>
+                const changing = ({ target }) => {
+                    const opts = ["2.jpg", "3.jpg", "4.jpg"]
+                    target.src = "/images/" + opts[ Math.floor(Math.random()*opts.length) ]
+                }
+                vint
+                .whenExitViewport(changing, document.getElementById('random-img'))
+            </script>
+        </section>
+        <section
+            style="height: 33vh;">
+            <span id="back-to-view"></span>
+            <script>
+                var count = 0
+                const backToViewport = ({ target }) => {
+                    target.textContent = 'I am back +' + (++count)
+                }
+
+                vint
+                .whenEnterViewport(backToViewport, document.getElementById('back-to-view'))
+            </script>
+        </section>
+        <section 
+            id="self-destory"
+            style="height: 50vh;">
+            You can only saw me once, self destory on exit viewport
+            <script>
+                const initSelfDestory = ({ target }) => {
+                    vint
+                    .onceExitViewport(target)
+                    .then(({ target }) => {
+                        target.remove()
+                    })
+                }
+
+                vint
+                .onceEnterViewport(document.getElementById('self-destory'))
+                .then(initSelfDestory)
+            </script>
+        </section>
+        <section>
+            <img 
+                id="lazyLoadImgOnce" 
+                style="height:auto;width:100%;"/>
+            <script>
+                vint
+                .onceEnterViewport(document.getElementById('lazyLoadImgOnce'))
+                .then(({ target, entry, observer }) => {
+                    target.src = "/images/1.jpg"
+                } )
+            </script>
+        </section>
+    </body>
+</html>
