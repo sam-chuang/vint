@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/picnic@6.5.0/releases/picnic.min.css">
-        <script type="text/javascript"  src="/dist/vint.js"></script>
+        <script type="text/javascript"  src="dist/vint.js"></script>
     </head>
     <body style="margin:0;">
         <section
@@ -17,7 +17,7 @@
             <script>
                 const changing = ({ target }) => {
                     const opts = ["2.jpg", "3.jpg", "4.jpg"]
-                    target.src = "/images/" + opts[ Math.floor(Math.random()*opts.length) ]
+                    target.src = "images/" + opts[ Math.floor(Math.random()*opts.length) ]
                 }
                 vint
                 .whenExitViewport(changing, document.getElementById('random-img'))
@@ -62,7 +62,7 @@
                 vint
                 .onceEnterViewport(document.getElementById('lazyLoadImgOnce'))
                 .then(({ target, entry, observer }) => {
-                    target.src = "/images/1.jpg"
+                    target.src = "images/1.jpg"
                 } )
             </script>
         </section>
